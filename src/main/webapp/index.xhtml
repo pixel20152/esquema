@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+    xmlns:h="http://java.sun.com/jsf/html"  
+    xmlns:f="http://java.sun.com/jsf/core"  
+    xmlns:p="http://primefaces.org/ui">
+
+    <h:head>  
+  
+    </h:head>  
+      
+    <h:body>  
+    <h:form id="form">
+        
+ 
+         <p:dataList value="#{listaClientes.clientes}" var="cliente" type="unordered" itemType="none" paginator="true" rows="10" styleClass="paginated">
+             <f:facet name="header">
+                 Paginator
+             </f:facet>
+
+             <p:commandLink update=":form:carDetail" oncomplete="PF('carDialog').show()" title="View Detail" styleClass="ui-icon ui-icon-search" style="float:left;margin-right:10px">
+
+                 <f:setPropertyActionListener value="#{cliente}" target="#{listaClientes.selectedCliente}" />
+                 <h:outputText value="#{cliente.id}, #{cliente.nombre}" />
+
+             </p:commandLink>
+             <h:outputText value="#{cliente.id}, #{cliente.tarjeta}" style="display:inline-block"/>
+
+         </p:dataList>
+
+        <p:commandButton ajax="true" value="Submit"  oncomplete="PF('dlg').show()" />
+ 
+        <p:dialog header="Values" resizable="false" showEffect="fade" widgetVar="dlg">
+            
+
+            <p:commandButton ajax="true" value="aceptar"  oncomplete="PF('dlg').show()" onclick="window.location.replace('galeria.xhtml')"/>
+
+        </p:dialog>
+        
+            <p:dialog header="Car Info" widgetVar="carDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+        <p:outputPanel id="carDetail" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{not empty listaClientes.selectedCliente}" columnClasses="label,value">
+                <f:facet name="header">
+                    <p:graphicImage url="/niebla-logo.jpg" width="100"/> 
+                </f:facet>
+ 
+                <h:outputText value="Id:" />
+                <h:outputText value="#{listaClientes.selectedCliente.id}" />
+ 
+                <h:outputText value="Year" />
+                <h:outputText value="#{listaClientes.selectedCliente.tarjeta}" />
+  
+                <h:outputText value="Nombre" />
+                <h:outputText value="#{listaClientes.selectedCliente.nombre}" />
+            </p:panelGrid>
+        </p:outputPanel>
+    </p:dialog>
+        
+        
+         <!--
+         <p:commandButton ajax="true"
+                          value="Guardar Cambios"
+                          style="-webkit-box-shadow: none!important;
+                    -moz-box-shadow: none!important;
+                    box-shadow: none!important;
+                    background-image: none!important;
+                    text-shadow: none!important;
+                    color:white;
+                    font-weight: bolder;
+                    font-size: medium;
+                    background-color: blue"
+                          onclick="window.location.replace('index.xhtml')"/>
+-->
+
+
+ 
+    <p:dialog header="cliente Info" widgetVar="clienteDialog" modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+        <p:outputPanel id="clienteDetail" style="text-align:center;">
+            <p:panelGrid  columns="2" rendered="#{listaClientes.selectedCliente}" columnClasses="label,value">
+                <f:facet name="header">
+                    <p:graphicImage url="niebla-logo.jpg" width="100"/> 
+                </f:facet>
+ 
+                <h:outputText value="Id:" />
+                <h:outputText value="#{listaClientes.selectedCliente.id}" />
+ 
+            </p:panelGrid>
+            
+        </p:outputPanel>
+    </p:dialog>
+    
+    
+    </h:form>
+
+    </h:body>  
+</html> 

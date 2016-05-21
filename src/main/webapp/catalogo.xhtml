@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"  
+      xmlns:h="http://java.sun.com/jsf/html"  
+      xmlns:f="http://java.sun.com/jsf/core"  
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <ui:composition template="/template/template.xhtml" >
+
+    <ui:define name="content">
+
+    <h:body>  
+        <h:form id="form"> 
+
+ 
+            <p:dataScroller value="#{listaClientes.clientes}" var="cliente" chunkSize="10">
+                <f:facet name="header">
+                    Scroll Down to Load More Cars
+                </f:facet>
+
+                <h:panelGrid columns="2" style="width:30%" columnClasses="logo,detail">
+                    <p:outputPanel>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            
+                            <h:outputText value="Id:" />
+                            <h:outputText value="#{cliente.id}" style="font-weight: bold"/>
+
+                            <h:outputText value="Nombre:" />
+                            <h:outputText value="#{cliente.nombre}" style="font-weight: bold"/>
+
+                            <h:outputText value="Tarjeta:" />
+                            <h:outputText value="#{cliente.tarjeta}" style="font-weight: bold"/>
+
+                            <h:outputText value="Fecha de Nacimiento:" />
+                            <h:outputText value="#{cliente.fecha}" style="font-weight: bold"/>
+                            
+                        </h:panelGrid>
+                    </p:outputPanel>
+                </h:panelGrid>
+            </p:dataScroller>
+        </h:form>
+
+    </h:body>  
+    </ui:define>
+    </ui:composition>
+</html> 
